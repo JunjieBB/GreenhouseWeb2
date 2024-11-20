@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Greenhouse Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌱 IoT Greenhouse Dashboard 🌱</h1>
+        </header>
+        <div class="content">
+            <div class="sensor-data">
+                <div class="data-item">
+                    <h2>Temperature</h2>
+                    <span id="temperature">Loading...</span> °C
+                </div>
+                <div class="data-item">
+                    <h2>Humidity</h2>
+                    <span id="humidity">Loading...</span> %
+                </div>
+                <div class="data-item">
+                    <h2>Current Sensors</h2>
+                    <div class="current-sensors">
+                        <div class="sensor">
+                            <img src="image/solarpanel1.jpeg" alt="Sensor 1">
+                            <p>Sensor 1: <span id="sensor1">Loading...</span> A</p>
+                        </div>
+                        <div class="sensor">
+                            <img src="image/solarpanel2.jpg" alt="Sensor 2">
+                            <p>Sensor 2: <span id="sensor2">Loading...</span> A</p>
+                        </div>
+                        <div class="sensor">
+                            <img src="images/sensor3.png" alt="Sensor 3">
+                            <p>Sensor 3: <span id="sensor3">Loading...</span> A</p>
+                        </div>
+                        <div class="sensor">
+                            <img src="images/sensor4.png" alt="Sensor 4">
+                            <p>Sensor 4: <span id="sensor4">Loading...</span> A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>Data updates every 5 seconds. Developed for IoT Greenhouse monitoring.</p>
+        </footer>
+    </div>
+    <script>
+        setInterval(function() {
+            fetch('/sensor-data')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('temperature').innerText = data.temperature;
+                    document.getElementById('humidity').innerText = data.humidity;
+                    document.getElementById('sensor1').innerText = data.sensor1;
+                    document.getElementById('sensor2').innerText = data.sensor2;
+                    document.getElementById('sensor3').innerText = data.sensor3;
+                    document.getElementById('sensor4').innerText = data.sensor4;
+                });
+        }, 5000);
+    </script>
+</body>
+</html>
